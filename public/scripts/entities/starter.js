@@ -1,8 +1,7 @@
 class Starter extends Denizen {
-
   constructor(options) {
     super(options);
-    this.imageUri = '/images/volcano.jpg';
+    this.imageUri = './images/volcano.jpg';
     this.position.y += this.height;
   }
 
@@ -17,7 +16,7 @@ class Starter extends Denizen {
       tank: this.tank,
       position: this.position,
       velocity: new Vector(xVel, yVel),
-      type: this.tank.getRandomSpecies(),
+      type: this.tank.getRandomSpecies()
     });
   }
 }

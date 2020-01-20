@@ -1,0 +1,10 @@
+.fishtank-style {
+  background-color: blue;
+  border: 1px solid black;
+  width: 95%;
+  height: 95%;
+}
+
+#fishtank {
+  position: relative;
+}

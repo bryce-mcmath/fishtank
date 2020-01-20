@@ -1,5 +1,4 @@
 class Denizen {
-
   constructor(options) {
     // console.log("constructing:", this.constructor.name, options);
     this.lastTime = new Date();
@@ -36,7 +35,7 @@ class Denizen {
   }
 
   updateOneTick() {
-    throw "not implemented";
+    throw 'not implemented';
   }
 
   renderRules() {
@@ -44,15 +43,15 @@ class Denizen {
       imageUri: this.imageUri,
       css: {
         width: this.width,
-        height: this.height,
+        height: this.height
       },
-      x: this.position.x - Math.floor(this.width/2),
-      y: this.position.y - Math.floor(this.height/2),
+      x: this.position.x - Math.floor(this.width / 2),
+      y: this.position.y - Math.floor(this.height / 2)
     };
   }
 
   onClick(event) {
-    throw "not implemented";
+    throw 'not implemented';
   }
 
   kill(duration) {
@@ -62,7 +61,6 @@ class Denizen {
   }
 
   outOfBounds(bounds) {
-    // TODO: it'd be cool if Seeds could go above the top fo the tank, then fall back down
     return (
       this.position.x + 5 * this.width < bounds.minX ||
       this.position.x - 5 * this.width > bounds.maxX ||
