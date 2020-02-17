@@ -4,24 +4,24 @@ class Fishtank {
     this.denizens = {};
     this.specieses = {};
     this.drawing = true;
-    this.drawGraphicsBound = this.drawGraphics.bind(this); // ahahaha, welcome to `this` hell.  callback hell never had it so fiery.
+    this.drawGraphicsBound = this.drawGraphics.bind(this);
     requestAnimationFrame(this.drawGraphicsBound);
   }
 
   registerSpecies() {
-    for (var species of arguments) {
+    for (let species of arguments) {
       this.specieses[species.name] = species;
     }
   }
 
   getRandomSpecies() {
-    var specieses = Object.values(this.specieses);
-    var index = randRangeInt(specieses.length - 1);
+    let specieses = Object.values(this.specieses);
+    let index = randRangeInt(specieses.length - 1);
     return specieses[index];
   }
 
   registerDenizen(individual) {
-    var id;
+    let id;
     while (!id || this.denizens[id]) {
       id = Math.floor(Math.random() * 1000) + '';
     }
@@ -32,7 +32,6 @@ class Fishtank {
   getProximateDenizens(center, radius) {
     function isNearCenter(individual) {
       return individual.position.distance(center) <= radius;
-      //return distance(individual.position, center) <= radius;
     }
     return Object.values(this.denizens).filter(isNearCenter);
   }
@@ -41,7 +40,7 @@ class Fishtank {
     delete this.denizens[id];
     duration = duration || 1;
     duration = Number(duration) + 's';
-    var $victim = $('#' + id);
+    let $victim = $('#' + id);
     $victim.off();
     $victim.css({ transition: 'all ' + duration });
     $victim.css({
@@ -56,7 +55,7 @@ class Fishtank {
     if (!time) {
       time = new Date();
     }
-    for (var id in this.denizens) {
+    for (let id in this.denizens) {
       if (this.denizens[id].update) {
         this.denizens[id].update(time);
       }
@@ -75,14 +74,14 @@ class Fishtank {
   }
 
   drawGraphics() {
-    this.runPhysics(); // TODO: maybe this should be on a separate setInterval
-    var $fishtank = $('#' + this.divName);
-    var centerX = Math.floor(window.innerWidth / 2);
-    var floorY = Math.floor(window.innerHeight * 0.95);
-    for (var id in this.denizens) {
-      var denizen = this.denizens[id];
-      var renderRules = denizen.renderRules();
-      var $denizen = $('#' + id);
+    this.runPhysics();
+    let $fishtank = $('#' + this.divName);
+    let centerX = Math.floor(window.innerWidth / 2);
+    let floorY = Math.floor(window.innerHeight * 0.95);
+    for (let id in this.denizens) {
+      let denizen = this.denizens[id];
+      let renderRules = denizen.renderRules();
+      let $denizen = $('#' + id);
       if ($denizen.length === 0) {
         $denizen = $(`<img id="${id}"></img>`);
         $denizen.css({ position: 'fixed' });
@@ -97,10 +96,12 @@ class Fishtank {
       if (renderRules.x !== undefined) {
         $denizen.css('left', renderRules.x + centerX);
       }
+
       if (renderRules.y !== undefined) {
         $denizen.css('bottom', renderRules.y + 10);
       }
-      $denizen.css(renderRules.css); // this is allowed to override the previous, if the Denizen wants to
+
+      $denizen.css(renderRules.css);
     }
 
     if (this.drawing) {
@@ -110,10 +111,17 @@ class Fishtank {
 
   getBounds() {
     return {
-      minX: -(((window.innerWidth / 2) * 90) / 100),
-      maxX: ((window.innerWidth / 2) * 90) / 100,
-      minY: -200,
-      maxY: ((window.innerHeight - 10) * 90) / 100
+      minX: 40,
+      maxX: -(-window.innerWidth + 200),
+      minY: 0,
+      maxY: window.innerHeight - 20
     };
+
+    // return {
+    //   minX: -(((window.innerWidth / 2) * 90) / 100),
+    //   maxX: ((window.innerWidth / 2) * 90) / 100,
+    //   minY: -200,
+    //   maxY: ((window.innerHeight - 10) * 90) / 100
+    // };
   }
 }

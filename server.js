@@ -1,8 +1,8 @@
-var express = require('express');
+let express = require('express');
 
-var PORT = process.env.PORT || 5050;
+let PORT = process.env.PORT || 5050;
 
-var app = express();
+let app = express();
 
 app.use(express.static('public'));
 

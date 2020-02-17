@@ -5,10 +5,11 @@ class BiteFish extends Fish {
     this.maxSurge = 1.0;
     this.surgMult = 3.0;
     this.imageUri = './images/bite-fish.gif';
+    this.isTasty = false;
   }
 
   updateOneTick() {
-    var delta = this.swimVelocity.scale(
+    let delta = this.swimVelocity.scale(
       PHYSICS_TICK_SIZE_S * (1 + this.surgeSecondsLeft * this.surgMult)
     );
     this.position.addMut(delta);

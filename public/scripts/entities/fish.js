@@ -1,17 +1,19 @@
 class Fish extends Denizen {
   constructor(options) {
     super(options);
-    this.imageUri = './images/fish01.png';
-    this.maxSwimSpeed = 100;
+    this.imageUri = './images/herring.png';
+    this.maxSwimSpeed = 150;
     this.makeNewVelocity();
     this.isTasty = true;
+    this.height = 60;
+    this.width = 100;
   }
 
   generateSwimVelocity(max, min) {
     if (min && min > max) {
       min = 0;
     }
-    var newSpeed = new Vector(
+    let newSpeed = new Vector(
       randRangeInt(-max, max),
       randRangeInt(-max / 2, max / 2)
     );
@@ -25,7 +27,7 @@ class Fish extends Denizen {
   }
 
   updateOneTick() {
-    var delta = this.swimVelocity.scale(PHYSICS_TICK_SIZE_S);
+    let delta = this.swimVelocity.scale(PHYSICS_TICK_SIZE_S);
     this.position.addMut(delta);
     this.timeUntilSpeedChange -= PHYSICS_TICK_SIZE_S;
     if (this.timeUntilSpeedChange < 0) {

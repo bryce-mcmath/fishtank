@@ -2,8 +2,8 @@ class Denizen {
   constructor(options) {
     // console.log("constructing:", this.constructor.name, options);
     this.lastTime = new Date();
-    this.height = options.height || 60;
-    this.width = options.width || 60;
+    this.height = options.height || 120;
+    this.width = options.width || 120;
     this.position = options.position.clone();
     if (options.velocity) {
       this.velocity = options.velocity.clone();
@@ -14,12 +14,14 @@ class Denizen {
   }
 
   calcPhysicsTicks(newTime) {
-    var deltaTime = (newTime - this.lastTime) / 1000.0; // convert to seconds
-    var numTicks = Math.floor(deltaTime / PHYSICS_TICK_SIZE_S);
-    var secondsConsumed = numTicks * PHYSICS_TICK_SIZE_S;
+    let deltaTime = (newTime - this.lastTime) / 1000.0; // convert to seconds
+    let numTicks = Math.floor(deltaTime / PHYSICS_TICK_SIZE_S);
+    let secondsConsumed = numTicks * PHYSICS_TICK_SIZE_S;
     //console.log(this.lastTime.getSeconds(), this.lastTime.getMilliseconds(), "...", newTime.getSeconds(), newTime.getMilliseconds(),
     //    "-->", numTicks, "ticks,   ", secondsConsumed, "time consumed");
-    this.lastTime = new Date(this.lastTime.getTime() + secondsConsumed * 1000);
+    this.lastTime = new Date(
+      this.lastTime.getTime() + secondsConsumed * 1000
+    );
     return numTicks;
   }
 
@@ -28,7 +30,7 @@ class Denizen {
     if (this.outOfBounds(this.tank.getBounds())) {
       this.kill();
     } else {
-      for (var i = 0; i < this.calcPhysicsTicks(t); i++) {
+      for (let i = 0; i < this.calcPhysicsTicks(t); i++) {
         this.updateOneTick();
       }
     }

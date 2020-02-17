@@ -1,8 +1,8 @@
 $(() => {
-  window.fishtank = new Fishtank('fishtank'); // making it global to make debugging 1% easier.  shhhh.
+  window.fishtank = new Fishtank('fishtank');
   window.fishtank.registerSpecies(SwitchFish, GoFish, BiteFish);
-  var starter = new Starter({
-    tank: window.fishtank, // look, it's Dependency Injection!  Pretend you care!
+  let starter = new Starter({
+    tank: window.fishtank,
     position: new Vector(0, 0)
   });
 });
